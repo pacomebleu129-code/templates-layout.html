@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h3>Statistiques du restaurant</h3>
+
+<div class="stats-box">
+    <p><strong>Total des ventes :</strong> {{ total_sales or 0 }} FCFA</p>
+    <p><strong>Nombre de commandes :</strong> {{ count_orders or 0 }}</p>
+</div>
+
+{% endblock %}
