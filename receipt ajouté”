@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h3>Détail de la commande #{{ order.id }}</h3>
+
+<table class="orders-table">
+    <tr>
+        <th>Article</th>
+        <th>Prix</th>
+        <th>Quantité</th>
+        <th>Total</th>
+    </tr>
+
+    {% for item in items %}
+    <tr>
+        <td>
+            {% for m in menu %}
+                {% if m.id == item.menu_item_id %}
+                    {{ m.name }}
+                {% endif %}
+            {% endfor %}
+        </td>
+        <td>{{ item.price_at_order }} FCFA</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.price_at_order * item.quantity }} FCFA</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
