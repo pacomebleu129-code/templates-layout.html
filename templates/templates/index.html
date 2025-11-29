@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h3>Menu</h3>
+
+<div class="menu-grid">
+    {% for item in menu %}
+        <div class="menu-item">
+            <h4>{{ item.name }}</h4>
+            <p>{{ item.price }} FCFA</p>
+
+            <form action="/add_to_order" method="POST" onsubmit="addToOrder(event)">
+                <input type="hidden" name="item_id" value="{{ item.id }}">
+                <input type="hidden" name="table_number" value="Salle">
+
+                <button type="submit">Ajouter</button>
+            </form>
+        </div>
+    {% endfor %}
+</div>
+
+<script>
+async function addToOrder(event) {
+    event.preventDefault();
+
+    let form = event.target;
+    let data = new FormData(form);
+
+    let res = await fetch("/add_to_order", {
+        method: "POST",
+        body: data
+    });
+
+    let json = await res.json();
+    alert("Ajouté au panier !");
+}
+</script>
+
+{% endblock %}
